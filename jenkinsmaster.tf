@@ -14,9 +14,10 @@ resource "aws_instance" "JenkinsMaster" {
   key_name               = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${aws_security_group.jenkins_master.id}"]
   subnet_id              = "${aws_subnet.default.id}"
+
   provisioner "remote-exec" {
     inline = [
-      "sudo sh -c \"echo \"${var.chef_server_public_ip} chefserver\" >> /etc/hosts\"",
+      "sudo sh -c \"echo ${var.chef_server_public_ip} chefserver >> /etc/hosts\"",
       "sudo apt-get update -y",
     ]
   }

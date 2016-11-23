@@ -18,35 +18,36 @@ resource "aws_instance" "JenkinsSlave" {
   tags {
     Name = "MGMT_TOOLING_JENKINS_SLAVE_TERRAFROM"
   }
+
   provisioner "remote-exec" {
     inline = [
       # Remove hardcoded IP with chef_server_public_ip
-      "sudo sh -c \"echo '35.163.78.214 chefserver' >> /etc/hosts\"",
+      "sudo sh -c \"echo ${var.chef_server_public_ip} chefserver >> /etc/hosts\"",
 
       "sudo apt-get update -y",
     ]
 
     # "sudo sh -c \" ${var.chef_server_entry_hosts} \"",
   }
-  provisioner "chef" {
-    environment = "${var.chef_env_name}"
+#  provisioner "chef" {
+#    environment = "${var.chef_env_name}"
 
-    fetch_chef_certificates = "true"
+#    fetch_chef_certificates = "true"
 
     #Todo: use chef cookbook to update sudoers file
     # run_list = ["java::oracle", "git::default", "docker::default", "awscli::default", "sudoers" ]
-    run_list = ["maven::default"]
+#    run_list = ["maven::default"]
 
-    node_name = "JenkinsSlave"
+#    node_name = "JenkinsSlave"
 
     /*secret_key = "${file("../encrypted_data_bag_secret")}"*/
 
-    server_url      = "https://${var.chef_server_name}/organizations/${var.chef_organization_name}"
-    recreate_client = true
-    user_name       = "${var.chef_user_name}"
-    user_key        = "${file(var.chef_admin_key_path)}"
-    version         = "${var.chef_version}"
-  }
+#    server_url      = "https://${var.chef_server_name}/organizations/${var.chef_organization_name}"
+#    recreate_client = true
+#    user_name       = "${var.chef_user_name}"
+#    user_key        = "${file(var.chef_admin_key_path)}"
+#    version         = "${var.chef_version}"
+#  }
   provisioner "remote-exec" {
     inline = [
       "sudo apt-get install -y python-software-properties debconf-utils",
