@@ -16,7 +16,7 @@ resource "aws_instance" "JenkinsMaster" {
   subnet_id              = "${aws_subnet.default.id}"
   provisioner "remote-exec" {
     inline = [
-      "sudo sh -c \"echo '35.163.78.214 chefserver' >> /etc/hosts\"",
+      "sudo sh -c \"echo \"${var.chef_server_public_ip} chefserver\" >> /etc/hosts\"",
       "sudo apt-get update -y",
     ]
   }
