@@ -55,8 +55,8 @@ resource "aws_security_group" "jenkins_master" {
     from_port   = "${var.jenkinsmaster_port}"
     to_port     = "${var.jenkinsmaster_port}"
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-
+    #cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${var.jenkinsmaster_allowed_ips}"] 
     #cidr_blocks = ["10.0.1.0/26"]  #TOTEST: Allow jenkins access only from within the Internal VPC
   }
 

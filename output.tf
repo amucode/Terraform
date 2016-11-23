@@ -2,9 +2,9 @@ output "jenkins_master_ipaddress" {
   value = "${aws_instance.JenkinsMaster.public_ip}"
 }
 
-output "jenkins_slave_ipaddress" {
-  value = "${aws_instance.JenkinsSlave.public_ip}"
-}
+#output "jenkins_slave_ipaddress" {
+#  value = "${aws_instance.JenkinsSlave.public_ip}"
+#}
 
 output "jenkins_master_url" {
   value = "http://${aws_instance.JenkinsMaster.public_ip}:${var.jenkinsmaster_port}"

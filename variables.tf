@@ -16,7 +16,7 @@ variable "jenkinsslave_aws_ecr_secret_key" {
 
 variable "aws_region" {
   description = "The AWS region to create things in."
-  default     = "us-west-2"
+  default     = "eu-central-1"
 }
 
 variable "key_name" {
@@ -37,8 +37,8 @@ variable "aws_amis" {
   description = "Chef, Jekins Master,  Jenkins Slave"
 
   default = {
-    us-west-2 = "ami-01f05461" # Ubuntu 14.04
-    #eu-central-1 = "ami-8504fdea"
+    #us-west-2 = "ami-01f05461" # Ubuntu 14.04
+    eu-central-1 = "ami-8504fdea"
   }
 }
 
@@ -64,6 +64,10 @@ variable "jenkinsslave_count" {
 
 variable "jenkinsmaster_port" {
   default = "8080"
+}
+
+variable "jenkinsmaster_allowed_ips" {
+  default = ["110.172.135.78/32", "110.172.135.79/32"]
 }
 
 variable "chef_version" {
